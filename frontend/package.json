@@ -11,10 +11,12 @@
     "lint": "eslint . --ext .vue,.ts,.tsx"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "element-plus": "^2.8.4",
     "leaflet": "^1.9.4",
     "lucide-vue-next": "^0.460.0",
     "pinia": "^2.1.7",

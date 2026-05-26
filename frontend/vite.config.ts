@@ -142,6 +142,8 @@ export default defineConfig({
       'vue-router',
       'pinia',
       'axios',
+      'element-plus',
+      '@element-plus/icons-vue',
       'lucide-vue-next',
       'reka-ui',
       'clsx',
