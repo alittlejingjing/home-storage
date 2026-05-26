@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ins风 温暖淡黄色调 */
+    --background: 40 33% 97%;
+    --foreground: 30 15% 20%;
+    --card: 40 25% 99%;
+    --card-foreground: 30 15% 20%;
+    --popover: 40 25% 99%;
+    --popover-foreground: 30 15% 20%;
+    --primary: 38 85% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 38 25% 94%;
+    --secondary-foreground: 30 15% 20%;
+    --muted: 38 20% 93%;
+    --muted-foreground: 30 10% 45%;
+    --accent: 38 30% 92%;
+    --accent-foreground: 30 15% 20%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --warning: 32 90% 52%;
+    --warning-foreground: 40 96% 95%;
+    --success: 145 55% 48%;
+    --success-foreground: 140 70% 95%;
+    --border: 35 20% 90%;
+    --input: 35 20% 90%;
+    --ring: 38 85% 58%;
+    --radius: 1rem;
+    --sidebar-background: 40 25% 99%;
+    --sidebar-foreground: 30 10% 45%;
+    --sidebar-primary: 38 85% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 38 25% 94%;
+    --sidebar-accent-foreground: 30 15% 20%;
+    --sidebar-border: 35 20% 90%;
+    --sidebar-ring: 38 85% 58%;
+  }
+  .dark {
+    --background: 30 12% 10%;
+    --foreground: 40 25% 96%;
+    --card: 30 12% 12%;
+    --card-foreground: 40 25% 96%;
+    --popover: 30 12% 12%;
+    --popover-foreground: 40 25% 96%;
+    --primary: 38 75% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 12% 18%;
+    --secondary-foreground: 40 25% 96%;
+    --muted: 30 12% 18%;
+    --muted-foreground: 35 10% 55%;
+    --accent: 30 12% 18%;
+    --accent-foreground: 40 25% 96%;
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --warning: 38 85% 52%;
+    --warning-foreground: 32 90% 52%;
+    --success: 145 55% 45%;
+    --success-foreground: 140 70% 95%;
+    --border: 30 12% 22%;
+    --input: 30 12% 22%;
+    --ring: 38 75% 55%;
+    --sidebar-background: 30 12% 10%;
+    --sidebar-foreground: 35 10% 55%;
+    --sidebar-primary: 38 75% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 12% 18%;
+    --sidebar-accent-foreground: 40 25% 96%;
+    --sidebar-border: 30 12% 22%;
+    --sidebar-ring: 38 75% 55%;
+  }
+}
+
+@layer base {
+  html { font-size: 16px; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: ui-sans-serif, system-ui, sans-serif, 'Segoe UI', Roboto, sans-serif;
+    @apply bg-background text-foreground;
+  }
+  * { @apply border-border; }
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* 移动端安全区适配 */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-area-top { padding-top: env(safe-area-inset-top); }
+  .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* 触控优化：最小点击区域 44px */
+.min-touch {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* 移动端字体最小 14px */
+.text-mobile {
+  font-size: 14px;
+}
+
+/* 页面内容安全边距 */
+.page-container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* 卡片圆角统一 */
+.card-mobile {
+  border-radius: 16px;
+}
+
+/* 底部 Tab 安全区 */
+.tab-bar-safe {
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
