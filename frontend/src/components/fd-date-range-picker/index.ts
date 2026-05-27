@@ -14,57 +14,57 @@ import { ref, watch } from 'vue'
 export type DateRangeValue = [string, string] | null
 
 export interface FdDateRangePickerProps {
-  modelValue?: DateRangeValue
+    modelValue?: DateRangeValue
 }
 
 export function useFdDateRangePicker(
-  props: FdDateRangePickerProps,
-  emit: (event: 'update:modelValue', value: DateRangeValue) => void,
+    props: FdDateRangePickerProps,
+    emit: (event: 'update:modelValue', value: DateRangeValue) => void,
 ) {
-  const startDate = ref<string | null>(null)
-  const endDate = ref<string | null>(null)
+    const startDate = ref<string | null>(null)
+    const endDate = ref<string | null>(null)
 
-  /**
-   * 外部 v-model 同步到内部
-   */
-  watch(
-    () => props.modelValue,
-    (value) => {
-      startDate.value = value?.[0] || null
-      endDate.value = value?.[1] || null
-    },
-    { immediate: true },
-  )
+    /**
+     * 外部 v-model 同步到内部
+     */
+    watch(
+        () => props.modelValue,
+        (value) => {
+            startDate.value = value?.[0] || null
+            endDate.value = value?.[1] || null
+        },
+        { immediate: true },
+    )
 
-  /**
-   * 内部变更回写 v-model
-   */
-  function syncEmit() {
-    const start = startDate.value
-    const end = endDate.value
-    if (!start && !end) {
-      emit('update:modelValue', null)
-      return
+    /**
+     * 内部变更回写 v-model
+     */
+    function syncEmit() {
+        const start = startDate.value
+        const end = endDate.value
+        if (!start && !end) {
+            emit('update:modelValue', null)
+            return
+        }
+        emit('update:modelValue', [start || '', end || ''])
     }
-    emit('update:modelValue', [start || '', end || ''])
-  }
 
-  watch(startDate, (start) => {
-    if (start && endDate.value && start > endDate.value) {
-      endDate.value = start
+    watch(startDate, (start) => {
+        if (start && endDate.value && start > endDate.value) {
+            endDate.value = start
+        }
+        syncEmit()
+    })
+
+    watch(endDate, (end) => {
+        if (end && startDate.value && end < startDate.value) {
+            startDate.value = end
+        }
+        syncEmit()
+    })
+
+    return {
+        startDate,
+        endDate,
     }
-    syncEmit()
-  })
-
-  watch(endDate, (end) => {
-    if (end && startDate.value && end < startDate.value) {
-      startDate.value = end
-    }
-    syncEmit()
-  })
-
-  return {
-    startDate,
-    endDate,
-  }
 }
