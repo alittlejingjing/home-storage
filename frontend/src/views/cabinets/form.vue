@@ -1,46 +1,34 @@
 <template>
-    <div class="fd-item-form">
-        <!-- 表单内容 -->
-        <div class="fd-item-form__body">
-            <!-- 物品名称 -->
-            <div class="fd-item-form__field">
-                <label class="fd-item-form__label">
-                    物品名称 <span class="fd-item-form__required">*</span>
+    <div class="fd-cabinet-form">
+        <!-- 表单体 -->
+        <div class="fd-cabinet-form__body">
+            <!-- 储物柜名称 -->
+            <div class="fd-cabinet-form__field">
+                <label class="fd-cabinet-form__label">
+                    储物柜名称 <span class="fd-cabinet-form__required">*</span>
                 </label>
-                <el-input v-model="draft.name" placeholder="请输入物品名称" maxlength="50" show-word-limit
-                    :class="{ 'fd-item-form__input--error': nameError }" @blur="validateName" />
-                <span v-if="nameError" class="fd-item-form__error">{{ nameError }}</span>
+                <el-input v-model="draft.name" placeholder="请输入储物柜名称" maxlength="30" show-word-limit
+                    :class="{ 'fd-cabinet-form__input--error': nameError }" @blur="validateName" />
+                <span v-if="nameError" class="fd-cabinet-form__error">{{ nameError }}</span>
             </div>
 
-            <!-- 分类 -->
-            <div class="fd-item-form__field">
-                <label class="fd-item-form__label">
-                    分类 <span class="fd-item-form__required">*</span>
+            <!-- 照片上传 -->
+            <div class="fd-cabinet-form__field">
+                <label class="fd-cabinet-form__label">
+                    照片 <span class="fd-cabinet-form__hint">（最多 {{ MAX_PHOTOS }} 张）</span>
                 </label>
-                <el-select v-model="draft.categoryId" placeholder="请选择分类" style="width: 100%">
-                    <el-option v-for="cat in categoriesOptions" :key="cat.id" :label="cat.name" :value="cat.id" />
-                </el-select>
-            </div>
-
-            <!-- 照片上传（缩略图占比大） -->
-            <div class="fd-item-form__field">
-                <label class="fd-item-form__label">
-                    照片 <span class="fd-item-form__hint">（最多 {{ MAX_PHOTOS }} 张）</span>
-                </label>
-                <div class="fd-item-form__photos">
-                    <!-- 已上传缩略图 -->
-                    <div v-for="(photo, idx) in draft.photos" :key="idx" class="fd-item-form__photo-item">
+                <div class="fd-cabinet-form__photos">
+                    <div v-for="(photo, idx) in draft.photos" :key="idx" class="fd-cabinet-form__photo-item">
                         <img :src="photo" alt="" @click="previewPhoto(photo)" />
-                        <button type="button" class="fd-item-form__photo-remove" @click="removePhoto(idx)">
+                        <button type="button" class="fd-cabinet-form__photo-remove" @click="removePhoto(idx)">
                             <el-icon :size="14">
                                 <Close />
                             </el-icon>
                         </button>
                     </div>
-                    <!-- 上传按钮 -->
-                    <el-upload v-if="draft.photos.length < MAX_PHOTOS" class="fd-item-form__photo-upload"
+                    <el-upload v-if="draft.photos.length < MAX_PHOTOS" class="fd-cabinet-form__photo-upload"
                         :auto-upload="false" :show-file-list="false" accept="image/*" :on-change="handleFileChange">
-                        <div class="fd-item-form__photo-upload-inner">
+                        <div class="fd-cabinet-form__photo-upload-inner">
                             <el-icon :size="24">
                                 <Plus />
                             </el-icon>
@@ -50,39 +38,16 @@
                 </div>
             </div>
 
-            <!-- 存放日期 -->
-            <div class="fd-item-form__field">
-                <label class="fd-item-form__label">
-                    存放日期 <span class="fd-item-form__required">*</span>
-                </label>
-                <FdDatePicker
-                    v-model="draft.storageDate"
-                    placeholder="选择存放日期"
-                    :clearable="false"
-                />
-            </div>
-
-            <!-- 储物柜 -->
-            <div class="fd-item-form__field">
-                <label class="fd-item-form__label">
-                    储物柜 <span class="fd-item-form__required">*</span>
-                </label>
-                <el-select v-model="draft.cabinetId" placeholder="请选择储物柜" style="width: 100%">
-                    <el-option v-for="cab in cabinetsOptions" :key="cab.id" :label="cab.name" :value="cab.id" />
-                </el-select>
-            </div>
-
-            <!-- 备注 -->
-            <div class="fd-item-form__field">
-                <label class="fd-item-form__label">备注</label>
-                <el-input v-model="draft.note" type="textarea" :rows="3" maxlength="200" show-word-limit
-                    placeholder="请输入备注信息（可选）" />
+            <!-- 位置描述 -->
+            <div class="fd-cabinet-form__field">
+                <label class="fd-cabinet-form__label">位置描述</label>
+                <el-input v-model="draft.location" type="textarea" :rows="3" placeholder="请输入储物柜的详细位置描述（可选）" />
             </div>
         </div>
 
         <!-- 底部保存按钮 -->
-        <div class="fd-item-form__footer">
-            <el-button type="primary" class="fd-item-form__save" :loading="saving" @click="handleSave">
+        <div class="fd-cabinet-form__footer">
+            <el-button type="primary" class="fd-cabinet-form__save" :loading="saving" @click="handleSave">
                 <el-icon :size="16">
                     <Check />
                 </el-icon>
@@ -92,8 +57,8 @@
 
         <!-- 图片预览 -->
         <el-dialog v-model="previewVisible" :show-close="true" :modal="true" :append-to-body="true" align-center
-            width="90%" class="fd-item-form__preview">
-            <img v-if="previewUrl" :src="previewUrl" class="fd-item-form__preview-img" alt="" />
+            width="90%" class="fd-cabinet-form__preview">
+            <img v-if="previewUrl" :src="previewUrl" class="fd-cabinet-form__preview-img" alt="" />
         </el-dialog>
     </div>
 </template>
@@ -108,17 +73,16 @@ import {
     Close,
     Check,
 } from '@element-plus/icons-vue'
-import { useItemForm } from './form.ts'
-import { useItemsStore } from '@/stores/items'
-import FdDatePicker from '@/components/fd-date-picker/index.vue'
+import { useCabinetForm } from './form.ts'
+import { useCabinetsStore } from '@/stores/cabinets'
 
 const router = useRouter()
-const itemsStore = useItemsStore()
+const cabinetsStore = useCabinetsStore()
 
 const {
     draft,
     isEdit,
-    itemId,
+    cabinetId,
     isDirty,
     nameError,
     validate,
@@ -126,9 +90,7 @@ const {
     handleUpload,
     removePhoto,
     buildPayload,
-    categoriesOptions,
-    cabinetsOptions,
-} = useItemForm()
+} = useCabinetForm()
 
 const MAX_PHOTOS = 3
 const saving = ref(false)
@@ -160,8 +122,7 @@ async function handleSave() {
     const error = validate()
     if (error) {
         ElMessage.warning(error)
-        // 聚焦第一个无效字段
-        const firstInput = document.querySelector('.fd-item-form__input--error input') as HTMLElement
+        const firstInput = document.querySelector('.fd-cabinet-form__input--error input') as HTMLElement
         firstInput?.focus()
         return
     }
@@ -169,23 +130,23 @@ async function handleSave() {
     saving.value = true
     try {
         const payload = buildPayload()
-        if (isEdit.value && itemId.value) {
-            await itemsStore.updateItem(itemId.value, payload)
+        if (isEdit.value && cabinetId.value) {
+            await cabinetsStore.updateCabinet(cabinetId.value, payload)
             ElMessage.success('保存成功')
         } else {
-            await itemsStore.addItem(payload)
+            await cabinetsStore.addCabinet(payload)
             ElMessage.success('新增成功')
         }
         skipGuard.value = true
-        router.push('/items')
-    } catch {
-        ElMessage.error('保存失败')
+        router.push('/cabinets')
+    } catch (err) {
+        const message = err instanceof Error ? err.message : '保存失败'
+        ElMessage.error(message)
     } finally {
         saving.value = false
     }
 }
 
-// 未保存更改守卫：点击保存后 skipGuard=true，直接放行不再弹窗
 onBeforeRouteLeave((_to, _from, next) => {
     if (skipGuard.value || !isDirty.value) {
         next()
@@ -202,57 +163,13 @@ onBeforeRouteLeave((_to, _from, next) => {
 </script>
 
 <style lang="less" scoped>
-.fd-item-form {
+.fd-cabinet-form {
     display: flex;
     flex-direction: column;
     height: 100%;
     background: var(--fd-cozy-cream);
     font-family: var(--fd-cozy-font-body);
 
-    // 顶部导航
-    &__nav {
-        display: flex;
-        align-items: center;
-        padding: 12px 16px;
-        flex-shrink: 0;
-        position: sticky;
-        top: 0;
-        background: var(--fd-cozy-glass);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--fd-cozy-butter);
-        z-index: 20;
-    }
-
-    &__back {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        background: var(--fd-cozy-white);
-        border: 1px solid var(--fd-cozy-butter);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--fd-cozy-ink);
-        cursor: pointer;
-
-        &:active {
-            background: var(--fd-cozy-cream-deep);
-        }
-    }
-
-    &__nav-title {
-        flex: 1;
-        text-align: center;
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--fd-cozy-ink);
-    }
-
-    &__nav-spacer {
-        width: 36px;
-    }
-
-    // 表单体
     &__body {
         flex: 1;
         overflow-y: auto;
@@ -276,18 +193,6 @@ onBeforeRouteLeave((_to, _from, next) => {
 
         &:nth-child(3) {
             animation-delay: 0.09s;
-        }
-
-        &:nth-child(4) {
-            animation-delay: 0.12s;
-        }
-
-        &:nth-child(5) {
-            animation-delay: 0.15s;
-        }
-
-        &:nth-child(6) {
-            animation-delay: 0.18s;
         }
     }
 
@@ -329,7 +234,6 @@ onBeforeRouteLeave((_to, _from, next) => {
         }
     }
 
-    // 照片区（缩略图占比大）
     &__photos {
         display: flex;
         gap: 10px;
@@ -410,7 +314,6 @@ onBeforeRouteLeave((_to, _from, next) => {
         }
     }
 
-    // 底部保存
     &__footer {
         flex-shrink: 0;
         padding: 12px 16px;
@@ -437,10 +340,8 @@ onBeforeRouteLeave((_to, _from, next) => {
         }
     }
 
-    // 表单输入框统一风格
     :deep(.el-input__wrapper),
-    :deep(.el-textarea__inner),
-    :deep(.el-select .el-input__wrapper) {
+    :deep(.el-textarea__inner) {
         border-radius: 12px;
         background: var(--fd-cozy-white);
         box-shadow: 0 1px 4px rgba(45, 138, 120, 0.06);
@@ -457,7 +358,6 @@ onBeforeRouteLeave((_to, _from, next) => {
         background: transparent;
     }
 
-    // 图片预览
     &__preview {
         :deep(.el-dialog__body) {
             padding: 0;

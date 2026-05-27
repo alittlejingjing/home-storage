@@ -9,8 +9,9 @@
                     <el-option label="全部" value="all" />
                     <el-option v-for="cat in categoriesOptions" :key="cat.id" :label="cat.name" :value="cat.id" />
                 </el-select>
-                <el-date-picker v-model="dateRange" type="daterange" range-separator="至" start-placeholder="开始日期"
-                    end-placeholder="结束日期" class="fd-items__filter-date" value-format="YYYY-MM-DD" />
+            </div>
+            <div class="fd-items__filter-row fd-items__filter-row--date">
+                <FdDateRangePicker v-model="dateRange" class="fd-items__filter-date" />
             </div>
         </div>
 
@@ -110,6 +111,7 @@ import {
 } from '@element-plus/icons-vue'
 import { useItemList } from './index.ts'
 import { useItemsStore } from '@/stores/items'
+import FdDateRangePicker from '@/components/fd-date-range-picker/index.vue'
 import type { ItemVO } from '@/types/item'
 
 const router = useRouter()

@@ -1,0 +1,156 @@
+/**
+ * @file index.less
+ * @version 1.0.0
+ * @author wuwg <wuwg@thunisoft.com>
+ * @createTime 2026-05-27
+ * @copyright thunisoft fd
+ * @description 底部抽屉式单日期选择器样式
+ * @updateTime 2026-05-27
+ */
+
+.fd-date-picker {
+  width: 100%;
+
+  &--disabled {
+    opacity: 0.6;
+  }
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: 12px;
+    border: 1px solid var(--fd-cozy-butter);
+    background: var(--fd-cozy-white);
+    box-shadow: 0 1px 4px rgba(45, 138, 120, 0.06);
+    cursor: pointer;
+    font-family: var(--fd-cozy-font-body);
+    text-align: left;
+    outline: none;
+  }
+
+  &--disabled &__trigger {
+    cursor: not-allowed;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: var(--fd-cozy-ink-soft);
+    font-size: 16px;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: var(--fd-cozy-ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &--placeholder {
+      color: var(--fd-cozy-ink-soft);
+      opacity: 0.7;
+    }
+  }
+
+  &__clear {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--fd-cozy-ink-soft);
+    cursor: pointer;
+  }
+
+  &__panel {
+    padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+    max-height: 70vh;
+    overflow: hidden;
+  }
+
+  &__panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__panel-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--fd-cozy-ink);
+  }
+
+  &__today {
+    padding: 4px 12px;
+    border: 1px solid var(--fd-cozy-butter);
+    border-radius: 999px;
+    background: var(--fd-cozy-cream);
+    color: var(--fd-cozy-amber-deep);
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  &__columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  &__column-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: var(--fd-cozy-ink-soft);
+    text-align: center;
+  }
+
+  &__select {
+    width: 100%;
+
+    :deep(.el-input__wrapper) {
+      border-radius: 10px;
+      background: var(--fd-cozy-white);
+      box-shadow: none;
+      border: 1px solid var(--fd-cozy-butter);
+    }
+  }
+
+  &__preview {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--fd-cozy-cream-deep);
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--fd-cozy-ink);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  &__btn {
+    flex: 1;
+    height: 44px;
+    border-radius: 12px;
+  }
+}
+
+:deep(.fd-date-picker__drawer.el-drawer) {
+  border-radius: 16px 16px 0 0;
+  max-height: 70vh;
+}

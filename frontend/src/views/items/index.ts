@@ -16,7 +16,7 @@ export function useItemList() {
 
     const keyword = ref('')
     const categoryId = ref('all')
-    // Element Plus el-date-picker value-format="YYYY-MM-DD" 返回 string[]
+    // 日期范围：[开始, 结束]，格式 YYYY-MM-DD
     const dateRange = ref<[string, string] | null>(null)
     const page = ref(1)
     const loading = ref(false)

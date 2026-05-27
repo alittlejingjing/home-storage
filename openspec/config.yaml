@@ -13,24 +13,24 @@ context: |
 # Per-artifact rules: 默认中文输出
 rules:
   default:
-    - 所有生成的文档内容必须使用中文（zh-CN）
-    - 技术名词保持英文：组件名（如 el-*）、CSS 变量（如 --fd-cozy-*）、路由路径、函数名、文件路径
-    - 语义性文本全部使用中文：标题、描述、场景、需求、决策依据、风险说明
+    - '所有生成的文档内容必须使用中文（zh-CN）'
+    - '技术名词保持英文：组件名（如 el-*）、CSS 变量（如 --fd-cozy-*）、路由路径、函数名、文件路径'
+    - '语义性文本全部使用中文：标题、描述、场景、需求、决策依据、风险说明'
   proposal:
-    - 使用"背景"替代"Why"，"变更内容"替代"What Changes"
-    - "Capabilities"翻译为"能力"，区分"新增能力"和"修改的能力"
-    - "Impact"翻译为"影响面"
+    - '使用"背景"替代"Why"，"变更内容"替代"What Changes"'
+    - 'Capabilities翻译为"能力"，区分"新增能力"和"修改的能力"'
+    - 'Impact翻译为"影响面"'
   design:
-    - "Goals"翻译为"目标"，"Non-Goals"翻译为"排除项"
-    - "Decisions"翻译为"决策"，需包含"决策依据"和"备选方案"
-    - "Risks / Trade-offs"翻译为"风险与权衡"
-    - "Migration Plan"翻译为"迁移计划"
-    - "Open Questions"翻译为"待决策问题"
+    - 'Goals翻译为"目标"，Non-Goals翻译为"排除项"'
+    - 'Decisions翻译为"决策"，需包含"决策依据"和"备选方案"'
+    - 'Risks / Trade-offs翻译为"风险与权衡"'
+    - 'Migration Plan翻译为"迁移计划"'
+    - 'Open Questions翻译为"待决策问题"'
   tasks:
-    - 任务描述全部使用中文
-    - 保留文件路径、函数名、CSS 变量、路由路径等英文技术标识
+    - '任务描述全部使用中文'
+    - '保留文件路径、函数名、CSS 变量、路由路径等英文技术标识'
   spec:
-    - "## ADDED Requirements" 输出为 "## 新增需求"
-    - "### Requirement:" 输出为 "### 需求："
-    - "#### Scenario:" 输出为 "#### 场景："
-    - WHEN / THEN 保留英文关键字不变
+    - '## ADDED Requirements 输出为 ## 新增需求'
+    - '### Requirement: 输出为 ### 需求：'
+    - '#### Scenario: 输出为 #### 场景：'
+    - 'WHEN / THEN 保留英文关键字不变'

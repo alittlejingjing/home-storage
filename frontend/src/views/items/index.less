@@ -20,6 +20,10 @@
             flex-wrap: wrap;
             gap: 8px;
             align-items: center;
+
+            &--date {
+                margin-top: 8px;
+            }
         }
 
         &-search {
@@ -51,14 +55,7 @@
         }
 
         &-date {
-            width: 220px;
-
-            :deep(.el-input__wrapper) {
-                border-radius: 12px;
-                background: var(--fd-cozy-white);
-                box-shadow: 0 1px 4px rgba(45, 138, 120, 0.06);
-                border: 1px solid var(--fd-cozy-butter);
-            }
+            width: 100%;
         }
     }
 
