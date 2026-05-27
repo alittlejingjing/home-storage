@@ -1,0 +1,86 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e42]:
+    - banner [ref=e43]:
+      - heading "首页" [level=1] [ref=e44]
+    - main [ref=e45]:
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - img [ref=e49]
+            - heading "家享收纳" [level=1] [ref=e51]
+          - paragraph [ref=e52]: 温暖的家，从整理开始
+        - generic [ref=e55] [cursor=pointer]:
+          - img [ref=e57]
+          - generic [ref=e60]: 搜索物品、储物柜...
+          - img [ref=e61]
+        - generic [ref=e63]:
+          - generic [ref=e65] [cursor=pointer]:
+            - img [ref=e66]
+            - paragraph [ref=e70]: "10"
+            - paragraph [ref=e71]: 物品
+          - generic [ref=e73] [cursor=pointer]:
+            - img [ref=e74]
+            - paragraph [ref=e77]: "6"
+            - paragraph [ref=e78]: 储物柜
+          - generic [ref=e80] [cursor=pointer]:
+            - img [ref=e81]
+            - paragraph [ref=e85]: "5"
+            - paragraph [ref=e86]: 分类
+        - generic [ref=e87]:
+          - heading "物品分类" [level=2] [ref=e89]
+          - generic [ref=e90]:
+            - generic [ref=e92] [cursor=pointer]:
+              - generic [ref=e95]:
+                - img [ref=e96]
+                - generic [ref=e98]: 1 件
+              - paragraph [ref=e99]: 生活用品
+            - generic [ref=e101] [cursor=pointer]:
+              - generic [ref=e104]:
+                - img [ref=e105]
+                - generic [ref=e107]: 3 件
+              - paragraph [ref=e108]: 衣物
+            - generic [ref=e110] [cursor=pointer]:
+              - generic [ref=e113]:
+                - img [ref=e114]
+                - generic [ref=e116]: 2 件
+              - paragraph [ref=e117]: 工具
+            - generic [ref=e119] [cursor=pointer]:
+              - generic [ref=e122]:
+                - img [ref=e123]
+                - generic [ref=e126]: 2 件
+              - paragraph [ref=e127]: 药品
+            - generic [ref=e129] [cursor=pointer]:
+              - generic [ref=e132]:
+                - img [ref=e133]
+                - generic [ref=e136]: 2 件
+              - paragraph [ref=e137]: 文件
+            - generic [ref=e139] [cursor=pointer]:
+              - img [ref=e141]
+              - generic [ref=e142]: 自定义分类
+        - generic [ref=e143]:
+          - generic [ref=e145] [cursor=pointer]:
+            - img [ref=e147]
+            - generic [ref=e151]:
+              - paragraph [ref=e152]: 全部物品
+              - paragraph [ref=e153]: 查看所有
+          - generic [ref=e155] [cursor=pointer]:
+            - img [ref=e157]
+            - generic [ref=e160]:
+              - paragraph [ref=e161]: 储物柜
+              - paragraph [ref=e162]: 空间管理
+    - navigation [ref=e163]:
+      - button "首页" [ref=e164] [cursor=pointer]:
+        - img [ref=e165]
+        - generic [ref=e168]: 首页
+      - button "物品" [ref=e169] [cursor=pointer]:
+        - img [ref=e170]
+        - generic [ref=e174]: 物品
+      - button "储物柜" [ref=e175] [cursor=pointer]:
+        - img [ref=e176]
+        - generic [ref=e179]: 储物柜
+      - button "我的" [ref=e180] [cursor=pointer]:
+        - img [ref=e181]
+        - generic [ref=e184]: 我的
+  - alert [ref=e185]:
+    - img [ref=e187]
+    - paragraph [ref=e189]: 登录成功

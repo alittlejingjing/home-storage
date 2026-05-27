@@ -1,0 +1,372 @@
+/**
+ * @file index.less
+ * @version 1.3.0
+ * @author wuwg <wuwg@thunisoft.com>
+ * @createTime 2026-05-26
+ * @copyright thunisoft fd
+ * @see [jsDoc中文文档]{@link http://www.dba.cn/book/jsdoc/JSDOCKuaiBiaoQianBLOCKTAGS/CONSTRUCTS.html}
+ * @description 登录页奶油黄温馨风：毛玻璃卡片、暖色渐变与柔和动效
+ * @updateTime 2026-05-26
+ */
+
+.fd-login {
+  --fd-login-white: #ffffff;
+  --fd-login-cream: #fffbf5;
+  --fd-login-cream-deep: #fff4e0;
+  --fd-login-butter: #fde68a;
+  --fd-login-honey: #f5c76a;
+  --fd-login-amber: #e8a838;
+  --fd-login-amber-deep: #c9892e;
+  --fd-login-ink: #4a3f32;
+  --fd-login-ink-soft: #8a7a68;
+  --fd-login-glass: rgba(255, 252, 245, 0.55);
+  --fd-login-glass-border: rgba(255, 255, 255, 0.78);
+  --fd-login-glass-shadow: 0 22px 48px -14px rgba(201, 137, 46, 0.18);
+  --fd-login-font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --fd-login-font-body: 'Nunito', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 2rem 1.5rem;
+  font-family: var(--fd-login-font-body);
+  color: var(--fd-login-ink);
+  background: linear-gradient(
+    160deg,
+    var(--fd-login-white) 0%,
+    var(--fd-login-cream) 35%,
+    var(--fd-login-cream-deep) 70%,
+    var(--fd-login-butter) 100%
+  );
+}
+
+.fd-login__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fd-login__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(56px);
+  opacity: 0.48;
+  animation: fd-login-float 14s ease-in-out infinite;
+}
+
+.fd-login__blob--1 {
+  top: -10%;
+  right: -8%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--fd-login-butter) 0%, transparent 68%);
+}
+
+.fd-login__blob--2 {
+  bottom: 5%;
+  left: -15%;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, var(--fd-login-honey) 0%, transparent 70%);
+  animation-delay: -5s;
+}
+
+.fd-login__blob--3 {
+  top: 42%;
+  right: 5%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--fd-login-white) 0%, transparent 65%);
+  animation-delay: -8s;
+}
+
+.fd-login__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+.fd-login__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.fd-login__header {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.fd-login__logo-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.fd-login__logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  color: var(--fd-login-white);
+  background: linear-gradient(
+    145deg,
+    var(--fd-login-amber) 0%,
+    var(--fd-login-honey) 55%,
+    var(--fd-login-butter) 100%
+  );
+  box-shadow:
+    0 14px 32px -8px rgba(201, 137, 46, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  border: 2px solid var(--fd-login-glass-border);
+  backdrop-filter: blur(8px);
+}
+
+.fd-login__logo-badge {
+  position: absolute;
+  right: -0.35rem;
+  bottom: 0.15rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fd-login-amber-deep);
+  background: var(--fd-login-glass);
+  border: 1px solid var(--fd-login-glass-border);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(201, 137, 46, 0.12);
+}
+
+.fd-login__title {
+  margin: 0;
+  font-family: var(--fd-login-font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--fd-login-ink);
+}
+
+.fd-login__subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--fd-login-ink-soft);
+}
+
+.fd-login__tagline {
+  margin: 0.75rem 0 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: var(--fd-login-amber-deep);
+  opacity: 0.88;
+}
+
+.fd-login__card {
+  width: 100%;
+  border: 1px solid var(--fd-login-glass-border);
+  border-radius: 1.5rem;
+  background: var(--fd-login-glass);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: var(--fd-login-glass-shadow);
+}
+
+.fd-login__card-body {
+  padding: 1.75rem 1.5rem 1.5rem;
+}
+
+.fd-login__card-greeting {
+  margin: 0 0 1.25rem;
+  font-family: var(--fd-login-font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--fd-login-ink);
+  text-align: center;
+}
+
+.fd-login__form {
+  width: 100%;
+}
+
+.fd-login__form-item {
+  margin-bottom: 1.125rem;
+
+  :deep(.el-form-item__label) {
+    padding-bottom: 0.35rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--fd-login-ink-soft);
+    line-height: 1.4;
+  }
+
+  :deep(.el-input__wrapper) {
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 1px 2px rgba(74, 63, 50, 0.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  }
+
+  :deep(.el-input__wrapper:hover) {
+    background: rgba(255, 255, 255, 0.78);
+    border-color: var(--fd-login-white);
+  }
+
+  :deep(.el-input__wrapper.is-focus) {
+    background: rgba(255, 255, 255, 0.88);
+    border-color: var(--fd-login-honey);
+    box-shadow:
+      inset 0 1px 2px rgba(74, 63, 50, 0.05),
+      0 0 0 3px rgba(245, 199, 106, 0.35);
+  }
+
+  :deep(.el-input__inner) {
+    font-family: var(--fd-login-font-body);
+    font-size: 0.9375rem;
+    color: var(--fd-login-ink);
+
+    &::placeholder {
+      color: #b5a48f;
+    }
+  }
+}
+
+.fd-login__form-item--submit {
+  margin-bottom: 0;
+  margin-top: 0.5rem;
+}
+
+.fd-login__submit {
+  width: 100%;
+  height: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  font-family: var(--fd-login-font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--fd-login-white);
+  background: linear-gradient(
+    135deg,
+    var(--fd-login-amber-deep) 0%,
+    var(--fd-login-amber) 50%,
+    var(--fd-login-honey) 100%
+  );
+  box-shadow: 0 12px 28px -10px rgba(201, 137, 46, 0.42);
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(
+      135deg,
+      #b87a28 0%,
+      var(--fd-login-amber-deep) 48%,
+      var(--fd-login-butter) 100%
+    );
+    box-shadow: 0 16px 32px -8px rgba(201, 137, 46, 0.48);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.fd-login__demo {
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  border-top: 1px dashed rgba(245, 199, 106, 0.55);
+}
+
+.fd-login__demo-btn {
+  font-family: var(--fd-login-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--fd-login-amber-deep);
+
+  &:hover {
+    color: #a87224;
+  }
+}
+
+.fd-login__demo-hint {
+  margin: 0.625rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--fd-login-ink-soft);
+}
+
+.fd-login__footer {
+  margin: 1.5rem 0 0;
+  font-family: var(--fd-login-font-display);
+  font-size: 0.8125rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--fd-login-ink-soft);
+  opacity: 0.82;
+}
+
+.fd-login__animate {
+  opacity: 0;
+  animation: fd-login-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.fd-login__animate--1 {
+  animation-delay: 0.05s;
+}
+
+.fd-login__animate--2 {
+  animation-delay: 0.18s;
+}
+
+.fd-login__animate--3 {
+  animation-delay: 0.32s;
+}
+
+@keyframes fd-login-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(10px, -14px) scale(1.04);
+  }
+}
+
+@keyframes fd-login-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-login__blob,
+  .fd-login__animate {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

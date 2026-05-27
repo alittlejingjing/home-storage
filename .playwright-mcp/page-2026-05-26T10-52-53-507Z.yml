@@ -1,0 +1,25 @@
+- generic [ref=e5]:
+  - generic [ref=e6]:
+    - img [ref=e9]
+    - heading "家享收纳" [level=1] [ref=e11]
+    - paragraph [ref=e12]: 温暖的家，从整理开始
+  - generic [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: "*邮箱"
+        - generic [ref=e19]:
+          - textbox "*邮箱" [ref=e22]:
+            - /placeholder: 请输入邮箱
+          - generic [ref=e37]: 请输入邮箱
+      - generic [ref=e23]:
+        - generic [ref=e24]: "*密码"
+        - generic [ref=e25]:
+          - textbox "*密码" [ref=e28]:
+            - /placeholder: 请输入密码
+          - generic [ref=e38]: 请输入密码
+      - button "登录" [active] [ref=e31] [cursor=pointer]:
+        - generic [ref=e32]: 登录
+    - generic [ref=e33]:
+      - button "使用演示账号快速登录" [ref=e34] [cursor=pointer]:
+        - generic [ref=e35]: 使用演示账号快速登录
+      - paragraph [ref=e36]: 演示账号：admin@example.com / password

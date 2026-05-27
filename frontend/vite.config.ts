@@ -13,6 +13,8 @@ const sandboxKey = userId ? `${projectId}_${userId}` : projectId
 // 生产构建始终用 '/'，仅 dev 模式使用沙箱路径（避免在容器内打包时被环境变量污染）
 const basePath = (!isProduction && projectId) ? `/sandbox/${sandboxKey}/` : '/'
 const routerBasename = basePath.replace(/\/$/, '') || '/'
+// 仅沙箱环境启用 terminal 插件；本地 dev 无 PROJECT_ID 时启用会导致 __terminal 请求失败并刷屏报错
+const isSandboxDev = !isProduction && !!projectId
 
 /**
  * Vite 插件：编译时为 Vue 模板元素注入源码定位属性
@@ -79,32 +81,6 @@ function fixTerminalBasePath(): Plugin {
   }
 }
 
-function injectEarlyErrorHandler(): Plugin {
-  return {
-    name: 'inject-early-error-handler',
-    transformIndexHtml(html: string) {
-      const script = `
-    <script>
-      window.addEventListener('error', function(event) {
-        console.error('[Error] ' + event.message, {
-          file: event.filename,
-          line: event.lineno,
-          col: event.colno,
-          stack: event.error ? event.error.stack : undefined
-        });
-      });
-      window.addEventListener('unhandledrejection', function(event) {
-        console.error('[UnhandledRejection]', {
-          message: event.reason ? (event.reason.message || String(event.reason)) : String(event.reason),
-          stack: event.reason ? event.reason.stack : undefined
-        });
-      });
-    </script>`
-      return html.replace('</head>', script + '\n  </head>')
-    }
-  }
-}
-
 export default defineConfig({
   base: basePath,
   define: {
@@ -113,14 +89,13 @@ export default defineConfig({
   plugins: [
     vueSourceLocatorPlugin(),
     vue(),
-    ...(!isProduction ? [
+    ...(isSandboxDev ? [
       terminal({
         console: 'terminal',
         output: ['console', 'terminal'],
       }),
       fixTerminalBasePath(),
     ] : []),
-    injectEarlyErrorHandler(),
   ],
   resolve: {
     alias: {
