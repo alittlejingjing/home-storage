@@ -41,7 +41,7 @@ const router = createRouter({
         { path: 'cabinets/:id/edit', name: 'CabinetEdit', component: () => import('@/views/cabinets/form.vue'), meta: { title: '编辑储物柜', showBack: true } },
         { path: 'categories', name: 'Categories', component: () => import('@/views/Categories.vue'), meta: { title: '分类管理', showBack: true } },
         { path: 'backup', name: 'Backup', component: () => import('@/views/Backup.vue'), meta: { title: '数据备份', showBack: true } },
-        { path: 'profile', name: 'Profile', component: () => import('@/views/Profile.vue'), meta: { title: '我的', showTab: true } },
+        { path: 'profile', name: 'Profile', component: () => import('@/views/profile/index.vue'), meta: { title: '我的', showTab: true } },
       ],
     },
     { path: '/:pathMatch(.*)*', redirect: '/login' },

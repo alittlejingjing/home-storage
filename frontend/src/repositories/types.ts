@@ -19,3 +19,8 @@ export interface ICabinetRepository {
   uploadPhoto(id: string, file: File): Promise<string>
   deletePhoto(id: string, index: number): Promise<boolean>
 }
+
+export interface ISystemRepository {
+  getStats(): Promise<{ totalItems: number; totalCabinets: number; totalCategories: number }>
+  clearCache(): Promise<void>
+}
