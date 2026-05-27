@@ -16,8 +16,8 @@ import { ElMessage } from 'element-plus'
 import { useAuthStore } from '@/stores/auth'
 
 export interface LoginFormModel {
-  email: string
-  password: string
+    email: string
+    password: string
 }
 
 /**
@@ -25,61 +25,62 @@ export interface LoginFormModel {
  * V2 可将 auth.login 替换为 IAuthRepository.login
  */
 export function useLoginForm() {
-  const router = useRouter()
-  const auth = useAuthStore()
-  const formRef = ref<FormInstance>()
-  const loading = ref(false)
+    const router = useRouter()
+    const auth = useAuthStore()
+    const formRef = ref<FormInstance>()
+    const loading = ref(false)
 
-  const formModel = reactive<LoginFormModel>({
-    email: '',
-    password: '',
-  })
+    const formModel = reactive<LoginFormModel>({
+        email: '',
+        password: '',
+    })
 
-  const rules: FormRules<LoginFormModel> = {
-    email: [
-      { required: true, message: '请输入邮箱', trigger: 'blur' },
-      { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' },
-    ],
-    password: [
-      { required: true, message: '请输入密码', trigger: 'blur' },
-    ],
-  }
-
-  async function submit() {
-    if (!formRef.value) {
-      return
+    const rules: FormRules<LoginFormModel> = {
+        email: [
+            { required: true, message: '请输入邮箱', trigger: 'blur' },
+            { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' },
+        ],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
     }
 
-    const valid = await formRef.value.validate().catch(() => false)
-    if (!valid) {
-      return
+    async function submit() {
+        if (!formRef.value) {
+            return
+        }
+
+        const valid = await formRef.value.validate().catch(() => false)
+        if (!valid) {
+            return
+        }
+
+        loading.value = true
+        try {
+            const ok = await auth.login(
+                formModel.email.trim(),
+                formModel.password,
+            )
+            if (ok) {
+                ElMessage.success('登录成功')
+                await router.push('/home')
+            } else {
+                ElMessage.error('账号或密码错误')
+            }
+        } finally {
+            loading.value = false
+        }
     }
 
-    loading.value = true
-    try {
-      const ok = await auth.login(formModel.email.trim(), formModel.password)
-      if (ok) {
-        ElMessage.success('登录成功')
-        await router.push('/home')
-      } else {
-        ElMessage.error('账号或密码错误')
-      }
-    } finally {
-      loading.value = false
+    function fillDemoAccount() {
+        formModel.email = 'admin@example.com'
+        formModel.password = 'password'
     }
-  }
 
-  function fillDemoAccount() {
-    formModel.email = 'admin@example.com'
-    formModel.password = 'password'
-  }
-
-  return {
-    formRef,
-    formModel,
-    rules,
-    loading,
-    submit,
-    fillDemoAccount,
-  }
+    return {
+        formRef,
+        formModel,
+        rules,
+        loading,
+        submit,
+        fillDemoAccount,
+    }
 }

@@ -29,7 +29,7 @@ const router = createRouter({
       meta: { requiresAuth: true },
       children: [
         { path: '', redirect: '/home' },
-        { path: 'home', name: 'Home', component: () => import('@/views/Home.vue'), meta: { title: '首页', showTab: true } },
+        { path: 'home', name: 'Home', component: () => import('@/views/home/index.vue'), meta: { title: '首页', showTab: true } },
         { path: 'search', name: 'Search', component: () => import('@/views/Search.vue'), meta: { title: '搜索', showBack: true } },
         { path: 'items', name: 'Items', component: () => import('@/views/Items.vue'), meta: { title: '物品', showTab: true, showAdd: true } },
         { path: 'items/create', name: 'ItemCreate', component: () => import('@/views/ItemForm.vue'), meta: { title: '新增物品', showBack: true } },

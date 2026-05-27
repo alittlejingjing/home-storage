@@ -1,0 +1,8 @@
+{
+  "typescript.tsdk": "frontend/node_modules/typescript/lib",
+  "vue.inlayHints.destructureProps": false,
+  "vue.server.hybridMode": "auto",
+  "files.associations": {
+    "*.vue": "vue"
+  }
+}
