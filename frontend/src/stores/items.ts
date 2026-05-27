@@ -1,21 +1,19 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { useCategoriesStore } from './categories'
-import { useCabinetsStore } from './cabinets'
+import { LocalItemRepository } from '@/repositories/local/itemRepository'
+import type { IItemRepository } from '@/repositories/types'
+import type { ItemVO, ItemFilters } from '@/types/item'
 
-export interface Item {
-  id: string
-  name: string
-  categoryId: string
-  photos: string[]
-  storageDate: string
-  cabinetId: string
-  note: string
-  createdAt: string
+/** V1 工厂函数：后续替换为 HttpItemRepository 即可迁移到 V2 */
+function getRepository(): IItemRepository {
+  return new LocalItemRepository()
 }
+
+export interface Item extends ItemVO {}
 
 const STORAGE_KEY = 'jiaxiang-items'
 
+/** 兼容已有 localStorage 数据 */
 function loadFromStorage(): Item[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
@@ -39,30 +37,27 @@ function getMockItems(): Item[] {
   ]
 }
 
-function saveToStorage(items: Item[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
-}
-
 export const useItemsStore = defineStore('items', () => {
   const items = ref<Item[]>(loadFromStorage())
+  const repo = getRepository()
 
   const totalCount = computed(() => items.value.length)
 
   const filteredItems = computed(() => {
-    return (keyword?: string, categoryId?: string, startDate?: string, endDate?: string) => {
+    return (filters?: ItemFilters) => {
       let result = [...items.value]
-      if (keyword?.trim()) {
-        const k = keyword.trim().toLowerCase()
+      if (filters?.keyword?.trim()) {
+        const k = filters.keyword.trim().toLowerCase()
         result = result.filter(i => i.name.toLowerCase().includes(k))
       }
-      if (categoryId && categoryId !== 'all') {
-        result = result.filter(i => i.categoryId === categoryId)
+      if (filters?.categoryId && filters.categoryId !== 'all') {
+        result = result.filter(i => i.categoryId === filters.categoryId)
       }
-      if (startDate) {
-        result = result.filter(i => i.storageDate >= startDate)
+      if (filters?.dateStart) {
+        result = result.filter(i => i.storageDate >= filters.dateStart)
       }
-      if (endDate) {
-        result = result.filter(i => i.storageDate <= endDate)
+      if (filters?.dateEnd) {
+        result = result.filter(i => i.storageDate <= filters.dateEnd)
       }
       return result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     }
@@ -96,30 +91,39 @@ export const useItemsStore = defineStore('items', () => {
     return (id: string) => items.value.find(i => i.id === id)
   })
 
-  function addItem(item: Omit<Item, 'id' | 'createdAt'>) {
-    const newItem: Item = {
-      ...item,
-      id: 'item-' + Date.now(),
-      createdAt: new Date().toISOString(),
-    }
-    items.value.unshift(newItem)
-    saveToStorage(items.value)
-    return newItem
+  /** delegate to repository and sync local ref */
+  async function addItem(item: Omit<Item, 'id' | 'createdAt'>) {
+    const created = await repo.create(item)
+    items.value.unshift(created)
+    syncStorage()
+    return created
   }
 
-  function updateItem(id: string, updates: Partial<Item>) {
-    const idx = items.value.findIndex(i => i.id === id)
-    if (idx >= 0) {
-      items.value[idx] = { ...items.value[idx], ...updates }
-      saveToStorage(items.value)
+  async function updateItem(id: string, updates: Partial<Item>) {
+    const updated = await repo.update(id, updates)
+    if (updated) {
+      const idx = items.value.findIndex(i => i.id === id)
+      if (idx >= 0) {
+        items.value[idx] = updated
+        syncStorage()
+      }
       return true
     }
     return false
   }
 
-  function deleteItem(id: string) {
-    items.value = items.value.filter(i => i.id !== id)
-    saveToStorage(items.value)
+  async function deleteItem(id: string) {
+    const ok = await repo.delete(id)
+    if (ok) {
+      items.value = items.value.filter(i => i.id !== id)
+      syncStorage()
+    }
+    return ok
+  }
+
+  /** sync Pinia ref back to legacy localStorage key */
+  function syncStorage() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items.value))
   }
 
   return {
@@ -133,5 +137,6 @@ export const useItemsStore = defineStore('items', () => {
     addItem,
     updateItem,
     deleteItem,
+    getRepository: () => repo,
   }
 })
