@@ -29,7 +29,7 @@
                     </el-icon>
                 </div>
                 <span class="fd-item-detail__label">分类</span>
-                <span class="fd-item-detail__value fd-item-detail__tag">
+                <span class="fd-item-detail__tag">
                     {{ categoryName }}
                 </span>
             </div>
@@ -162,6 +162,10 @@ function goCabinet() {
 
 function goEdit() {
     router.push(`/items/${itemId.value}/edit`)
+}
+
+function goBack() {
+    router.push('/items')
 }
 
 function confirmDelete() {
@@ -379,7 +383,10 @@ const Cabinet = OfficeBuilding
     }
 
     &__tag {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        flex: 0 0 auto;
+        margin-left: auto;
         padding: 2px 10px;
         border-radius: 8px;
         font-size: 12px;
@@ -388,8 +395,7 @@ const Cabinet = OfficeBuilding
         color: var(--fd-cozy-amber-deep);
         border: 1px solid var(--fd-cozy-butter);
         white-space: nowrap;
-        width: auto;
-        margin-left: auto;
+        max-width: 100%;
     }
 
     &__note {

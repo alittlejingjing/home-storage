@@ -10,6 +10,7 @@
         <div class="fd-layout__header-side fd-layout__header-side--left">
           <button
             v-if="showBack"
+            type="button"
             class="fd-layout__back"
             @click="goBack"
           >
@@ -103,8 +104,43 @@ function isActive(path: string) {
   return route.path === path || route.path.startsWith(path + '/')
 }
 
+function resolveBackFallback(): string {
+  const id = route.params.id as string | undefined
+
+  switch (route.name) {
+    case 'ItemDetail':
+    case 'ItemCreate':
+      return '/items'
+    case 'ItemEdit':
+      return id ? `/items/${id}` : '/items'
+    case 'CabinetDetail':
+    case 'CabinetCreate':
+      return '/cabinets'
+    case 'CabinetEdit':
+      return id ? `/cabinets/${id}` : '/cabinets'
+    case 'Search':
+      return '/home'
+    case 'Categories':
+    case 'Backup':
+      return '/profile'
+    default:
+      return '/home'
+  }
+}
+
 function goBack() {
-  router.back()
+  const historyBack = window.history.state?.back as string | undefined
+
+  if (
+    historyBack
+    && historyBack !== route.fullPath
+    && !historyBack.startsWith('/login')
+  ) {
+    router.push(historyBack)
+    return
+  }
+
+  router.push(resolveBackFallback())
 }
 
 function goAdd() {
@@ -123,7 +159,7 @@ function goAdd() {
 
 .fd-layout {
   --fd-nav-white: #ffffff;
-  --fd-nav-cream: #f5faf8;
+  --fd-nav-cream: #E8F4E8;
   --fd-nav-teal: #4a9e88;
   --fd-nav-teal-soft: rgba(74, 158, 136, 0.12);
   --fd-nav-teal-glow: rgba(74, 158, 136, 0.08);
@@ -259,6 +295,7 @@ function goAdd() {
   height: 1.25rem;
   position: relative;
   z-index: 1;
+  pointer-events: none;
 }
 
 .fd-layout__back-ripple,
@@ -270,6 +307,7 @@ function goAdd() {
   opacity: 0;
   transform: scale(0);
   transition: transform 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .fd-layout__back:active .fd-layout__back-ripple,
