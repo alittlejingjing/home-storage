@@ -1,6 +1,7 @@
 import type { Category, CategoryCreateInput, CategoryDeleteStrategy, CategoryOrderInput } from '@/types/category'
 import type { ItemVO, ItemFilters, ItemBrief } from '@/types/item'
 import type { Cabinet, CabinetVO, CabinetFilters, CabinetCreateInput } from '@/types/cabinet'
+import type { BackupData, BackupImportMode, BackupValidationResult, ImportResult } from '@/types/backup'
 
 export interface IItemRepository {
   create(item: Omit<ItemVO, 'id' | 'createdAt'>): Promise<ItemVO>
@@ -34,4 +35,10 @@ export interface ICategoryRepository {
 export interface ISystemRepository {
   getStats(): Promise<{ totalItems: number; totalCabinets: number; totalCategories: number }>
   clearCache(): Promise<void>
+}
+
+export interface IBackupRepository {
+  exportAll(): Promise<{ blob: Blob; filename: string }>
+  importAll(file: File, mode: BackupImportMode): Promise<ImportResult>
+  validateBackup(data: unknown): BackupValidationResult
 }

@@ -10,24 +10,24 @@
  */
 
 export interface ItemBrief {
-  id: string
-  name: string
-  cabinetId: string
-  cabinetName?: string
-  categoryId?: string
-  createdAt: string
+    id: string
+    name: string
+    cabinetId: string
+    cabinetName?: string
+    categoryId?: string
+    createdAt: string
 }
 
 export interface CategoryStat {
-  categoryId: string
-  name: string
-  count: number
-  color?: string
-  icon?: string
+    categoryId: string
+    name: string
+    count: number
+    color?: string
+    icon?: string
 }
 
 export interface DashboardVO {
-  categoryStats: CategoryStat[]
-  totalItems: number
-  totalCabinets: number
+    categoryStats: CategoryStat[]
+    totalItems: number
+    totalCabinets: number
 }
