@@ -469,10 +469,6 @@ async function addCategory() {
         background: #f8faf9;
         box-shadow: inset 0 0 0 1px rgba(74, 158, 136, 0.12);
         transition: box-shadow 0.2s;
-
-        &.is-focus {
-            box-shadow: inset 0 0 0 1.5px rgba(74, 158, 136, 0.35);
-        }
     }
 
     :deep(.el-input__inner) {
@@ -547,10 +543,6 @@ async function addCategory() {
         box-shadow: inset 0 0 0 1px rgba(74, 158, 136, 0.08);
         padding-left: 0.625rem;
         transition: box-shadow 0.2s;
-
-        &.is-focus {
-            box-shadow: inset 0 0 0 1.5px rgba(74, 158, 136, 0.28);
-        }
     }
 
     :deep(.el-input__inner) {

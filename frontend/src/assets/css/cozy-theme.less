@@ -35,4 +35,32 @@
   --el-color-primary-dark-2: #247a6a;
   --el-color-success: #4a9e88;
   --el-color-success-light-9: #ecf5f2;
+
+  /* 输入框 focus 与默认边框保持一致，避免出现主题色描边 */
+  --el-input-focus-border-color: var(--fd-cozy-butter);
+  --el-select-input-focus-border-color: var(--fd-cozy-butter);
+}
+
+/* ========== Element Plus：移除输入框 focus 高亮 ========== */
+.el-input__inner:focus,
+.el-input__inner:focus-visible,
+.el-textarea__inner:focus,
+.el-textarea__inner:focus-visible {
+  outline: none;
+}
+
+.el-input__wrapper.is-focus,
+.el-input__wrapper.is-focus:hover,
+.el-select .el-input.is-focus .el-input__wrapper,
+.el-select__wrapper.is-focused,
+.el-select__wrapper.is-focused:hover,
+.el-textarea__inner:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.el-input__wrapper.is-focus,
+.el-select .el-input.is-focus .el-input__wrapper,
+.el-select__wrapper.is-focused {
+  border-color: var(--fd-cozy-butter);
 }
