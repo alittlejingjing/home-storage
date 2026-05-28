@@ -3,186 +3,198 @@
    ============================================================ */
 
 .fd-profile {
-  padding: 16px;
-  padding-bottom: 24px;
+    padding: 16px;
+    padding-bottom: 24px;
+    overflow-x: hidden;
 }
 
 /* ---------- 用户信息卡片 ---------- */
 .fd-profile__user-card {
-  background: linear-gradient(135deg, rgba(74, 158, 136, 0.08) 0%, rgba(245, 250, 248, 0.5) 50%, rgba(255, 255, 255, 0.8) 100%);
-  border: none;
+    background: linear-gradient(135deg, rgba(74, 158, 136, 0.08) 0%, rgba(245, 250, 248, 0.5) 50%, rgba(255, 255, 255, 0.8) 100%);
+    border: none;
 }
 
 .fd-profile__user-card :deep(.el-card__body) {
-  padding: 20px;
+    padding: 20px;
 }
 
 .fd-profile__avatar-wrap {
-  position: relative;
+    position: relative;
 }
 
 .fd-profile__avatar-status {
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #34d399;
-  border: 2px solid #fff;
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #34d399;
+    border: 2px solid #fff;
 }
 
 .fd-profile__user-name {
-  font-size: 18px;
-  font-weight: 600;
-  color: #2d3748;
-  margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
 }
 
 .fd-profile__user-role {
-  font-size: 14px;
-  color: #5f7a73;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 4px;
+    font-size: 14px;
+    color: #5f7a73;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
 }
 
 /* ---------- 功能入口列表 ---------- */
 .fd-profile__menu-card {
-  border: none;
+    border: none;
 }
 
 .fd-profile__menu-card :deep(.el-card__body) {
-  padding: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .fd-profile__menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 0;
+
+    &:not(:first-child) {
+        border-top: 1px solid rgba(45, 138, 120, 0.1);
+    }
+
+    >.flex {
+        flex: 1;
+        min-width: 0;
+    }
 }
 
 .fd-profile__menu-item:active {
-  background-color: rgba(0, 0, 0, 0.03);
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .fd-profile__menu-item--danger {
-  color: #ef4444;
+    color: #ef4444;
 }
 
 .fd-profile__menu-item--danger:active {
-  background-color: rgba(239, 68, 68, 0.05);
+    background-color: rgba(239, 68, 68, 0.05);
 }
 
 .fd-profile__menu-icon-wrap {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .fd-profile__menu-icon-wrap--primary {
-  background: rgba(74, 158, 136, 0.1);
+    background: rgba(74, 158, 136, 0.1);
 }
 
 .fd-profile__menu-icon-wrap--warning {
-  background: rgba(245, 158, 11, 0.1);
+    background: rgba(245, 158, 11, 0.1);
 }
 
 .fd-profile__menu-icon-wrap--muted {
-  background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .fd-profile__menu-icon-wrap--danger {
-  background: rgba(239, 68, 68, 0.1);
+    background: rgba(239, 68, 68, 0.1);
 }
 
 .fd-profile__menu-icon {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .fd-profile__menu-icon--primary {
-  color: #4a9e88;
+    color: #4a9e88;
 }
 
 .fd-profile__menu-icon--warning {
-  color: #d97706;
+    color: #d97706;
 }
 
 .fd-profile__menu-icon--muted {
-  color: #6b7280;
+    color: #6b7280;
 }
 
 .fd-profile__menu-icon--danger {
-  color: #ef4444;
+    color: #ef4444;
 }
 
 .fd-profile__menu-label {
-  font-size: 14px;
-  font-weight: 500;
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .fd-profile__menu-arrow {
-  font-size: 16px;
-  color: #9ca3af;
+    font-size: 16px;
+    color: #9ca3af;
 }
 
 .fd-profile__menu-arrow--danger {
-  color: rgba(239, 68, 68, 0.6);
-}
-
-.fd-profile__divider {
-  margin: 0 16px;
+    color: rgba(239, 68, 68, 0.6);
 }
 
 /* ---------- 数据统计区 ---------- */
 .fd-profile__stats-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #2d3748;
-  padding-left: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3748;
+    padding-left: 4px;
 }
 
 .fd-profile__stat-card {
-  border: none;
-  text-align: center;
+    border: none;
+    text-align: center;
 }
 
 .fd-profile__stat-card :deep(.el-card__body) {
-  padding: 16px 12px;
+    padding: 16px 12px;
 }
 
 .fd-profile__stat-icon {
-  font-size: 20px;
-  color: rgba(74, 158, 136, 0.5);
-  margin-bottom: 6px;
+    font-size: 20px;
+    color: rgba(74, 158, 136, 0.5);
+    margin-bottom: 6px;
 }
 
 .fd-profile__stat-value {
-  font-size: 24px;
-  font-weight: 700;
-  color: #2d3748;
-  line-height: 1.2;
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d3748;
+    line-height: 1.2;
 }
 
 .fd-profile__stat-label {
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 4px;
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
 }
 
 /* ---------- 系统操作区 ---------- */
 .fd-profile__action-card {
-  border: none;
+    border: none;
 }
 
 .fd-profile__action-card :deep(.el-card__body) {
-  padding: 0;
+    padding: 0;
+    overflow: hidden;
 }
