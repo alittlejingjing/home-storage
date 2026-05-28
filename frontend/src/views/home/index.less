@@ -1,42 +1,88 @@
 /**
  * @file index.less
- * @version 2.0.0
+ * @version 3.0.0
  * @author wuwg <wuwg@thunisoft.com>
  * @createTime 2026-05-27
  * @copyright thunisoft fd
  * @see [jsDoc中文文档]{@link http://www.dba.cn/book/jsdoc/JSDOCKuaiBiaoQianBLOCKTAGS/CONSTRUCTS.html}
- * @description 首页 fd-home 块 V2：蓝绿色护眼，设计语言统一，克制但有细节
- * @updateTime 2026-05-27
+ * @description 首页 fd-home 块 V3：温馨手绘风格，浅绿色背景，暖米色卡片，可爱装饰元素
+ * @updateTime 2026-05-28
  */
 
 /* ============================================================
-   variables
+   variables - 手绘可爱风格配色
    ============================================================ */
 :root {
-    --fd-home-green-deep: #2d8a78;
-    --fd-home-green: #4a9e88;
-    --fd-home-green-mid: #6bbba6;
-    --fd-home-green-light: #9ed7c8;
-    --fd-home-green-pale: #d4ece6;
-    --fd-home-green-faint: #ecf5f2;
-    --fd-home-ink: #2d4139;
-    --fd-home-ink-soft: #5f7d72;
-    --fd-home-ink-ghost: #9ab0a7;
+    --fd-home-bg-green: #e8f4e8;
+    --fd-home-bg-green-light: #f0f9f0;
+    --fd-home-card-cream: #fef9f2;
+    --fd-home-card-cream-dark: #f9edd8;
+    --fd-home-pink-soft: #f5e6e6;
+    --fd-home-pink-light: #faeaea;
+    --fd-home-gold: #d4a574;
+    --fd-home-gold-light: #e8c9a0;
+    --fd-home-green-deep: #7cb87c;
+    --fd-home-green: #98c998;
+    --fd-home-green-mid: #b8dbb8;
+    --fd-home-green-light: #d4e8d4;
+    --fd-home-ink: #4a5c4a;
+    --fd-home-ink-soft: #7a8d7a;
+    --fd-home-ink-ghost: #a8b8a8;
+    --fd-home-border-color: rgba(124, 184, 124, 0.15);
 }
 
 /* ============================================================
-   page shell
+   page shell - 手绘风格背景
    ============================================================ */
 .fd-home {
     min-height: 100%;
-    padding: 0.875rem 0.875rem 2rem;
+    padding: 0.625rem 0.625rem 1.5rem;
     font-family: var(--fd-cozy-font-body);
     color: var(--fd-home-ink);
-    background: #f3f9f6;
+    background: var(--fd-home-bg-green);
     background-image:
-        radial-gradient(circle at 12% 8%, rgba(158, 215, 200, 0.12) 0%, transparent 35%),
-        radial-gradient(circle at 88% 92%, rgba(212, 236, 230, 0.35) 0%, transparent 40%);
+        radial-gradient(
+            circle at 8% 15%,
+            rgba(212, 165, 116, 0.12) 0%,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 92% 85%,
+            rgba(245, 230, 230, 0.3) 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(184, 219, 184, 0.15) 0%,
+            transparent 50%
+        );
     -webkit-overflow-scrolling: touch;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.fd-home::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    right: -20%;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%23d4a574' fill-opacity='0.08' d='M100 50c20 15 30 35 20 50-10 15-30 25-50 20-20-5-30-25-20-45 10-15 30-25 50-25z'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+.fd-home::after {
+    content: '';
+    position: fixed;
+    bottom: -30%;
+    left: -15%;
+    width: 80%;
+    height: 80%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='50' cy='150' r='40' fill='%23f5e6e6' fill-opacity='0.15'/%3E%3Ccircle cx='150' cy='120' r='30' fill='%2398c998' fill-opacity='0.08'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
 }
 
 .fd-home__pull {
@@ -69,58 +115,315 @@
 }
 
 /* ============================================================
-   header
+   banner - 森系卡通风格顶部横幅
+   ============================================================ */
+.fd-home__banner {
+    position: relative;
+    margin-bottom: 0.5rem;
+    padding: 0;
+    background: linear-gradient(
+        180deg,
+        var(--fd-home-bg-green-light) 0%,
+        var(--fd-home-bg-green) 100%
+    );
+    border-radius: 0 0 1.5rem 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(124, 184, 124, 0.1);
+}
+
+/* 背景装饰层 */
+.fd-home__banner-bg-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* 云朵 */
+.fd-home__cloud {
+    position: absolute;
+    animation: fd-home-float 8s ease-in-out infinite;
+}
+
+.fd-home__cloud--1 {
+    width: 3.5rem;
+    top: 0.5rem;
+    right: 15%;
+    animation-delay: 0s;
+}
+
+.fd-home__cloud--2 {
+    width: 2.75rem;
+    top: 1.5rem;
+    left: 10%;
+    animation-delay: -4s;
+}
+
+.fd-home__cloud-svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes fd-home-float {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(8px);
+    }
+}
+
+/* 星星 */
+.fd-home__star {
+    position: absolute;
+    animation: fd-home-twinkle 3s ease-in-out infinite;
+}
+
+.fd-home__star--1 {
+    width: 1.25rem;
+    top: 1rem;
+    right: 30%;
+    animation-delay: 0s;
+}
+
+.fd-home__star--2 {
+    width: 1rem;
+    top: 2rem;
+    left: 25%;
+    animation-delay: -1.5s;
+}
+
+.fd-home__star-svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes fd-home-twinkle {
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* 花朵 */
+.fd-home__flower {
+    position: absolute;
+    animation: fd-home-sway 5s ease-in-out infinite;
+}
+
+.fd-home__flower--1 {
+    width: 1.75rem;
+    bottom: 1.5rem;
+    left: 8%;
+}
+
+.fd-home__flower-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* 蝴蝶 */
+.fd-home__butterfly {
+    position: absolute;
+    width: 2.5rem;
+    top: 30%;
+    right: 8%;
+    animation: fd-home-butterfly-fly 6s ease-in-out infinite;
+}
+
+.fd-home__butterfly-svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes fd-home-butterfly-fly {
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+    25% {
+        transform: translate(15px, -10px) rotate(5deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(30px, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+    75% {
+        transform: translate(15px, 10px) rotate(-5deg);
+        opacity: 0.9;
+    }
+}
+
+.fd-home__banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+    position: relative;
+}
+
+.fd-home__banner-decoration {
+    flex-shrink: 0;
+    width: 4.5rem;
+    height: 5rem;
+    opacity: 0.85;
+    animation: fd-home-sway 4s ease-in-out infinite;
+}
+
+.fd-home__banner-decoration--left {
+    animation-delay: 0s;
+}
+
+.fd-home__banner-decoration--right {
+    animation-delay: -2s;
+}
+
+.fd-home__banner-svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes fd-home-sway {
+    0%,
+    100% {
+        transform: rotate(-2deg) translateX(0);
+    }
+    50% {
+        transform: rotate(2deg) translateX(2px);
+    }
+}
+
+.fd-home__banner-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+}
+
+.fd-home__banner-icon {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 0.25rem;
+    animation: fd-home-bounce 3s ease-in-out infinite;
+}
+
+.fd-home__banner-icon-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 3px 6px rgba(124, 184, 124, 0.2));
+}
+
+@keyframes fd-home-bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.fd-home__banner .fd-home__title {
+    font-size: 1.625rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(74, 92, 74, 0.08);
+}
+
+.fd-home__banner .fd-home__subtitle {
+    font-size: 0.875rem;
+    margin: 0;
+    gap: 0.375rem;
+}
+
+.fd-home__banner-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.875rem;
+}
+
+.fd-home__wave-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================================
+   header - 手绘风格装饰
    ============================================================ */
 .fd-home__header {
-    margin-bottom: 1.125rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    z-index: 1;
 }
 
 .fd-home__header-row {
     display: flex;
     align-items: center;
-    gap: 0.625rem;
+    gap: 0.5rem;
 }
 
 .fd-home__header-accent {
     display: block;
-    width: 4px;
-    height: 2rem;
-    border-radius: 2px;
-    background: linear-gradient(180deg, var(--fd-home-green) 0%, var(--fd-home-green-light) 100%);
+    width: 6px;
+    height: 2.25rem;
+    border-radius: 3px;
+    background: linear-gradient(
+        180deg,
+        var(--fd-home-gold) 0%,
+        var(--fd-home-gold-light) 100%
+    );
     flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(212, 165, 116, 0.3);
 }
 
 .fd-home__title {
     margin: 0;
-    font-family: var(--fd-cozy-font-display);
-    font-size: 1.375rem;
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
+    font-size: 1.75rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.02em;
     color: var(--fd-home-ink);
     line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(74, 92, 74, 0.1);
 }
 
 .fd-home__subtitle {
     display: flex;
     align-items: center;
     gap: 0.375rem;
-    margin: 0.25rem 0 0;
-    font-size: 0.8125rem;
-    font-weight: 400;
+    margin: 0.35rem 0 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
     color: var(--fd-home-ink-soft);
 }
 
 .fd-home__subtitle-dot {
     display: inline-block;
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--fd-home-green-mid);
+    background: var(--fd-home-gold);
+    box-shadow: 0 1px 3px rgba(212, 165, 116, 0.4);
     animation: fd-home-pulse 2.5s ease-in-out infinite;
 }
 
 @keyframes fd-home-pulse {
-
     0%,
     100% {
         opacity: 1;
@@ -134,43 +437,57 @@
 }
 
 /* ============================================================
-   search
+   search - 手绘风格卡片
    ============================================================ */
 .fd-home__search-card {
     position: relative;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(74, 158, 136, 0.18);
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(16px) saturate(140%);
+    margin-bottom: 0.95rem;
+    border: 2px solid var(--fd-home-green);
+    border-radius: 1.125rem;
+    background: var(--fd-home-card-cream);
     cursor: pointer;
     box-shadow:
-        0 2px 8px rgba(45, 138, 120, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
-    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        0 4px 12px rgba(124, 184, 124, 0.12),
+        0 1px 2px rgba(124, 184, 124, 0.08);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
 }
 
-.fd-home__search-card:hover {
-    border-color: rgba(74, 158, 136, 0.35);
-    box-shadow:
-        0 4px 16px rgba(45, 138, 120, 0.09),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-.fd-home__search-card:active {
-    transform: scale(0.99);
-}
-
-.fd-home__search-accent {
+.fd-home__search-card::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    border-radius: 1rem 1rem 0 0;
-    background: linear-gradient(90deg, var(--fd-home-green) 0%, var(--fd-home-green-light) 60%, var(--fd-home-green-pale) 100%);
-    opacity: 0.7;
+    height: 4px;
+    border-radius: 1.25rem 1.25rem 0 0;
+    background: linear-gradient(
+        90deg,
+        var(--fd-home-gold) 0%,
+        var(--fd-home-gold-light) 50%,
+        var(--fd-home-green-mid) 100%
+    );
+}
+
+.fd-home__search-card:hover {
+    border-color: var(--fd-home-green-deep);
+    box-shadow:
+        0 6px 20px rgba(124, 184, 124, 0.18),
+        0 2px 4px rgba(124, 184, 124, 0.1);
+    transform: translateY(-2px);
+}
+
+.fd-home__search-card:active {
+    transform: scale(0.98);
+}
+
+.fd-home__search-accent {
+    display: none;
 }
 
 .fd-home__search-body {
@@ -178,8 +495,8 @@
     z-index: 1;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1rem;
+    gap: 0.625rem;
+    padding: 0.75rem 0.875rem;
 }
 
 .fd-home__search-icon-wrap {
@@ -188,26 +505,30 @@
     justify-content: center;
     width: 2.25rem;
     height: 2.25rem;
-    border-radius: 0.625rem;
-    border: 1.5px solid rgba(74, 158, 136, 0.22);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(232, 244, 241, 0.6) 100%);
-    color: var(--fd-home-green);
+    border-radius: 50%;
+    border: 2px dashed var(--fd-home-green);
+    background: var(--fd-home-green-light);
+    color: var(--fd-home-green-deep);
     font-size: 1rem;
-    transition: transform 0.25s ease, background 0.25s ease;
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
     flex-shrink: 0;
 }
 
 .fd-home__search-card:hover .fd-home__search-icon-wrap {
-    transform: scale(1.08);
-    background: linear-gradient(145deg, rgba(232, 244, 241, 0.9) 0%, rgba(212, 236, 230, 0.7) 100%);
-    border-color: rgba(74, 158, 136, 0.4);
+    transform: rotate(15deg) scale(1.08);
+    background: var(--fd-home-green-mid);
+    border-color: var(--fd-home-green-deep);
 }
 
 .fd-home__search-text {
     flex: 1;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     font-weight: 500;
     color: var(--fd-home-ink-ghost);
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
     transition: color 0.2s ease;
 }
 
@@ -216,8 +537,10 @@
 }
 
 .fd-home__search-arrow {
-    color: var(--fd-home-green-light);
-    transition: transform 0.25s ease, color 0.25s ease;
+    color: var(--fd-home-gold);
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
 }
 
 .fd-home__search-card:hover .fd-home__search-arrow {
@@ -231,28 +554,38 @@
 .fd-home__stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.625rem;
-    margin-bottom: 1.25rem;
+    gap: 0.5rem;
+    margin-bottom: 0.875rem;
+    position: relative;
+    z-index: 1;
 }
 
 .fd-home__stat-card {
     position: relative;
-    border: 1px solid rgba(74, 158, 136, 0.12);
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(12px);
+    border: 2px solid var(--fd-home-green);
+    border-radius: 1.25rem;
+    background: var(--fd-home-card-cream);
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(45, 138, 120, 0.04);
-    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    box-shadow:
+        0 4px 12px rgba(124, 184, 124, 0.1),
+        0 1px 2px rgba(124, 184, 124, 0.06);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
     overflow: hidden;
 }
 
 .fd-home__stat-card:hover {
-    box-shadow: 0 4px 14px rgba(45, 138, 120, 0.08);
+    box-shadow:
+        0 6px 18px rgba(124, 184, 124, 0.15),
+        0 2px 4px rgba(124, 184, 124, 0.08);
+    border-color: var(--fd-home-green-deep);
+    transform: translateY(-3px);
 }
 
 .fd-home__stat-card:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
 .fd-home__stat-card::before {
@@ -261,150 +594,175 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    border-radius: 1rem 1rem 0 0;
+    height: 5px;
+    border-radius: 1.25rem 1.25rem 0 0;
 }
 
 .fd-home__stat-card--tone-0::before {
-    background: linear-gradient(90deg, var(--fd-home-green), var(--fd-home-green-mid));
+    background: linear-gradient(
+        90deg,
+        var(--fd-home-gold),
+        var(--fd-home-gold-light)
+    );
 }
 
 .fd-home__stat-card--tone-1::before {
-    background: linear-gradient(90deg, var(--fd-home-green-mid), var(--fd-home-green-light));
+    background: linear-gradient(
+        90deg,
+        var(--fd-home-green),
+        var(--fd-home-green-mid)
+    );
 }
 
 .fd-home__stat-card--tone-2::before {
-    background: linear-gradient(90deg, var(--fd-home-green-light), var(--fd-home-green-pale));
+    background: linear-gradient(
+        90deg,
+        var(--fd-home-pink-soft),
+        var(--fd-home-pink-light)
+    );
 }
 
 .fd-home__stat-body {
     position: relative;
-    padding: 0.875rem 0.375rem 0.625rem;
+    padding: 0.625rem 0.25rem 0.5rem;
     text-align: center;
 }
 
 .fd-home__stat-deco {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 0.375rem;
+    right: 0.375rem;
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 50%;
-    border: 1.5px solid rgba(74, 158, 136, 0.1);
+    border: 2px dashed var(--fd-home-green-light);
     pointer-events: none;
+    opacity: 0.5;
 }
 
 .fd-home__stat-value {
     margin: 0;
-    font-family: var(--fd-cozy-font-display);
-    font-size: 1.5rem;
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
+    font-size: 1.875rem;
     font-weight: 700;
     color: var(--fd-home-ink);
-    letter-spacing: -0.03em;
+    letter-spacing: 0.02em;
     line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(74, 92, 74, 0.08);
 }
 
 .fd-home__stat-label {
     margin: 0.25rem 0 0;
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
     color: var(--fd-home-ink-soft);
-    text-transform: uppercase;
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
 }
 
 /* ============================================================
-   section title
+   section title - 手绘风格装饰
    ============================================================ */
 .fd-home__section {
-    margin-bottom: 1.125rem;
+    margin-bottom: 0.875rem;
+    position: relative;
+    z-index: 1;
 }
 
 .fd-home__section-title {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.625rem;
     padding: 0;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--fd-home-ink);
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
 }
 
 .fd-home__section-line {
     display: block;
-    width: 3px;
-    height: 1rem;
-    border-radius: 2px;
-    background: var(--fd-home-green);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--fd-home-gold);
+    box-shadow: 0 2px 4px rgba(212, 165, 116, 0.3);
 }
 
 /* ============================================================
-   category cards
+   category cards - 手绘风格卡片
    ============================================================ */
 .fd-home__cat-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.625rem;
+    gap: 0.7rem;
 }
 
 .fd-home__cat-card {
     position: relative;
     min-height: 6rem;
-    border: 1.5px solid rgba(74, 158, 136, 0.14);
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
+    border: 2px solid var(--fd-home-green);
+    border-radius: 1.25rem;
+    background: var(--fd-home-card-cream);
     cursor: pointer;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(45, 138, 120, 0.04);
-    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow:
+        0 4px 12px rgba(124, 184, 124, 0.08),
+        0 1px 2px rgba(124, 184, 124, 0.04);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
 
 .fd-home__cat-card:hover {
-    border-color: rgba(74, 158, 136, 0.3);
-    box-shadow: 0 4px 14px rgba(45, 138, 120, 0.08);
+    border-color: var(--fd-home-green-deep);
+    box-shadow:
+        0 6px 20px rgba(124, 184, 124, 0.14),
+        0 2px 4px rgba(124, 184, 124, 0.08);
+    transform: translateY(-3px);
 }
 
 .fd-home__cat-card:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
-/* diagonal corner stripe — each tone gets a subtle diagonal wash */
+/* diagonal corner decoration — 手绘风格装饰 */
 .fd-home__cat-card::after {
     content: '';
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 0 1rem 0 0;
-    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    top: -0.5rem;
+    right: -0.5rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
     pointer-events: none;
+    opacity: 0.15;
 }
 
 .fd-home__cat-card--tone-0::after {
-    background: linear-gradient(135deg, rgba(90, 173, 150, 0.14) 0%, transparent 60%);
+    background: var(--fd-home-gold);
 }
 
 .fd-home__cat-card--tone-1::after {
-    background: linear-gradient(135deg, rgba(126, 203, 184, 0.14) 0%, transparent 60%);
+    background: var(--fd-home-green);
 }
 
 .fd-home__cat-card--tone-2::after {
-    background: linear-gradient(135deg, rgba(158, 215, 200, 0.14) 0%, transparent 60%);
+    background: var(--fd-home-pink-soft);
 }
 
 .fd-home__cat-card--tone-3::after {
-    background: linear-gradient(135deg, rgba(184, 224, 214, 0.18) 0%, transparent 60%);
+    background: var(--fd-home-green-mid);
 }
 
 .fd-home__cat-card--tone-4::after {
-    background: linear-gradient(135deg, rgba(60, 143, 122, 0.12) 0%, transparent 60%);
+    background: var(--fd-home-gold-light);
 }
 
 .fd-home__cat-card--tone-5::after {
-    background: linear-gradient(135deg, rgba(107, 187, 166, 0.14) 0%, transparent 60%);
+    background: var(--fd-home-green-light);
 }
 
 .fd-home__cat-card-inner {
@@ -428,57 +786,74 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 0.5rem;
-    background: rgba(74, 158, 136, 0.08);
-    color: var(--fd-home-green);
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 50%;
+    border: 2px dashed var(--fd-home-green);
+    background: var(--fd-home-green-light);
+    color: var(--fd-home-green-deep);
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.fd-home__cat-card:hover .fd-home__cat-icon-wrap {
+    transform: rotate(15deg) scale(1.1);
+    background: var(--fd-home-green-mid);
 }
 
 .fd-home__cat-count {
-    font-size: 0.6875rem;
-    font-weight: 600;
-    color: var(--fd-home-ink-ghost);
-    background: rgba(74, 158, 136, 0.06);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--fd-home-ink-soft);
+    background: var(--fd-home-green-light);
     padding: 0.125rem 0.375rem;
     border-radius: 999px;
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
+    border: 1px solid var(--fd-home-green);
 }
 
 .fd-home__cat-name {
-    margin: 0.625rem 0 0;
-    font-size: 0.8125rem;
-    font-weight: 600;
+    margin: 0.5rem 0 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
     color: var(--fd-home-ink);
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
 }
 
 .fd-home__cat-deco {
     position: absolute;
     bottom: 0.5rem;
     right: 0.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
     border-radius: 50%;
-    border: 1.5px solid rgba(74, 158, 136, 0.08);
+    border: 2px dashed var(--fd-home-green-light);
     pointer-events: none;
+    opacity: 0.5;
 }
 
-/* add category */
+/* add category - 手绘风格添加按钮 */
 .fd-home__cat-add {
     min-height: 6rem;
-    border: 2px dashed rgba(74, 158, 136, 0.22);
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.35);
+    border: 2px dashed var(--fd-home-green);
+    border-radius: 1.25rem;
+    background: var(--fd-home-card-cream);
     cursor: pointer;
-    transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.2s ease;
 }
 
 .fd-home__cat-add:hover {
-    background: rgba(232, 244, 241, 0.5);
-    border-color: rgba(74, 158, 136, 0.4);
+    background: var(--fd-home-green-light);
+    border-color: var(--fd-home-green-deep);
+    transform: translateY(-3px);
 }
 
 .fd-home__cat-add:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
 .fd-home__cat-add-inner {
@@ -486,21 +861,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.625rem;
     height: 100%;
-    padding: 0.75rem;
+    padding: 0.875rem;
 }
 
 .fd-home__cat-add-circle {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
-    border: 1.5px dashed rgba(74, 158, 136, 0.35);
-    color: var(--fd-home-green);
-    transition: transform 0.25s ease, background 0.25s ease;
+    border: 2px dashed var(--fd-home-green);
+    background: var(--fd-home-green-light);
+    color: var(--fd-home-green-deep);
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
 }
 
 .fd-home__cat-add:hover .fd-home__cat-add-circle {
@@ -515,46 +893,58 @@
 }
 
 /* ============================================================
-   quick actions
+   quick actions - 手绘风格快速操作
    ============================================================ */
 .fd-home__quick-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.625rem;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .fd-home__quick-card {
     position: relative;
-    border: 1px solid rgba(74, 158, 136, 0.12);
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(10px);
+    border: 2px solid var(--fd-home-green);
+    border-radius: 1.25rem;
+    background: var(--fd-home-card-cream);
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(45, 138, 120, 0.04);
-    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow:
+        0 4px 12px rgba(124, 184, 124, 0.08),
+        0 1px 2px rgba(124, 184, 124, 0.04);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
     overflow: hidden;
 }
 
 .fd-home__quick-card:hover {
-    border-color: rgba(74, 158, 136, 0.28);
-    box-shadow: 0 4px 14px rgba(45, 138, 120, 0.08);
+    border-color: var(--fd-home-green-deep);
+    box-shadow:
+        0 6px 20px rgba(124, 184, 124, 0.14),
+        0 2px 4px rgba(124, 184, 124, 0.08);
+    transform: translateY(-3px);
 }
 
 .fd-home__quick-card:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
-/* left accent stripe */
 .fd-home__quick-card::before {
     content: '';
     position: absolute;
-    top: 0.875rem;
-    bottom: 0.875rem;
+    top: 0;
     left: 0;
-    width: 3px;
-    border-radius: 0 2px 2px 0;
-    background: linear-gradient(180deg, var(--fd-home-green-mid), var(--fd-home-green-light));
-    opacity: 0.6;
+    right: 0;
+    height: 5px;
+    border-radius: 1.5rem 1.5rem 0 0;
+    background: linear-gradient(
+        90deg,
+        var(--fd-home-gold),
+        var(--fd-home-gold-light),
+        var(--fd-home-green-mid)
+    );
 }
 
 .fd-home__quick-body {
@@ -563,6 +953,7 @@
     display: flex;
     align-items: center;
     gap: 0.625rem;
+    padding: 0.75rem;
 }
 
 .fd-home__quick-icon {
@@ -571,29 +962,33 @@
     justify-content: center;
     width: 2.25rem;
     height: 2.25rem;
-    border-radius: 0.625rem;
-    border: 1px solid rgba(74, 158, 136, 0.15);
-    background: rgba(74, 158, 136, 0.06);
-    color: var(--fd-home-green);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease;
+    border-radius: 50%;
+    border: 2px dashed var(--fd-home-green);
+    background: var(--fd-home-green-light);
+    color: var(--fd-home-green-deep);
+    transition:
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 0.25s ease;
 }
 
 .fd-home__quick-card:hover .fd-home__quick-icon {
-    transform: scale(1.1);
-    background: rgba(74, 158, 136, 0.12);
+    transform: rotate(15deg) scale(1.1);
+    background: var(--fd-home-green-mid);
 }
 
 .fd-home__quick-title {
     margin: 0;
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--fd-home-ink);
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
 }
 
 .fd-home__quick-desc {
     margin: 0.15rem 0 0;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     color: var(--fd-home-ink-soft);
+    font-family: 'Comic Sans MS', 'PingFang SC', cursive;
 }
 
 /* ============================================================
@@ -629,6 +1024,10 @@
 .fd-home__stat-card {
     opacity: 0;
     animation: fd-home-pop-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    .el-card__body {
+        padding: 0.5rem;
+    }
 }
 
 .fd-home__stat-card:nth-child(1) {
@@ -662,27 +1061,27 @@
     animation: fd-home-pop-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.fd-home__cat-grid>*:nth-child(1) {
+.fd-home__cat-grid > *:nth-child(1) {
     animation-delay: 0.08s;
 }
 
-.fd-home__cat-grid>*:nth-child(2) {
+.fd-home__cat-grid > *:nth-child(2) {
     animation-delay: 0.14s;
 }
 
-.fd-home__cat-grid>*:nth-child(3) {
-    animation-delay: 0.20s;
+.fd-home__cat-grid > *:nth-child(3) {
+    animation-delay: 0.2s;
 }
 
-.fd-home__cat-grid>*:nth-child(4) {
+.fd-home__cat-grid > *:nth-child(4) {
     animation-delay: 0.26s;
 }
 
-.fd-home__cat-grid>*:nth-child(5) {
+.fd-home__cat-grid > *:nth-child(5) {
     animation-delay: 0.32s;
 }
 
-.fd-home__cat-grid>*:nth-child(6) {
+.fd-home__cat-grid > *:nth-child(6) {
     animation-delay: 0.38s;
 }
 
