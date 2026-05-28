@@ -9,7 +9,7 @@
  * @updateTime 2026-05-27
  */
 
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Component } from 'vue'
 import {
@@ -115,11 +115,18 @@ export function useHomeDashboard() {
     )
 
     function refreshDashboard() {
-        return new Promise<void>((resolve) => {
+        return categoriesStore.loadCategories().then(() => {
             refreshTick.value += 1
-            setTimeout(resolve, REFRESH_DURATION)
+            return new Promise<void>((resolve) => {
+                setTimeout(resolve, REFRESH_DURATION)
+            })
         })
     }
+
+    onMounted(async () => {
+        await categoriesStore.loadCategories()
+        refreshTick.value += 1
+    })
 
     function onTouchStart(e: TouchEvent) {
         if (window.scrollY > 0) {

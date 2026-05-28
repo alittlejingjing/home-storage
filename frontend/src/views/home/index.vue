@@ -72,7 +72,7 @@
                 <span class="fd-home__section-line" aria-hidden="true" />
                 物品分类
             </h2>
-            <div v-if="dashboard.categoryStats.length > 0" class="fd-home__cat-grid">
+            <div class="fd-home__cat-grid">
                 <div
                     v-for="cat in dashboard.categoryStats"
                     :key="cat.categoryId"
@@ -115,7 +115,6 @@
                     </div>
                 </div>
             </div>
-            <el-empty v-else description="暂无分类，去添加吧" :image-size="80" />
         </section>
 
         <section class="fd-home__section">
